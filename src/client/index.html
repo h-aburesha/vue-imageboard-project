@@ -4,14 +4,28 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Image Board</title>
+        <link rel="stylesheet" href="/styles.css">
         <script
             defer
-            src="./js/app.js"
+            src="/js/app.js"
             type="module"
             crossorigin="use-credentials"
         ></script>
     </head>
     <body>
+        <div id="main">
+            <h1>Uploading Files to Server</h1>
 
+            <!-- we will handle the upload manually in vueJS in the handleSubmit function -->
+            <form v-on:submit="handleSubmit">
+                <div>
+                    <span>Filename: </span><input type="text" name="filename" v-model="filename">
+                </div>
+                <div>
+                    <span>File: </span><input type="file" name="filee" accept="image/*" v-on:change="handleFileChange">
+                </div>
+                <button>Submit</button>
+            </form>
+        </div>
     </body>
 </html>
