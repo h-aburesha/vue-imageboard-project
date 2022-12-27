@@ -1,34 +1,45 @@
 import * as Vue from "./vue.js";
 
-Vue.createApp({});
-
 Vue.createApp({
     data: () => {
         return {
-            heading: "Here are some cities",
-            headingClass: "h1-header",
-            cities: [],
-            greeting: "Martin",
-            count: 0,
+            images: [],
+            title: "",
+            description: "",
+            username: "",
+            file: null,
+            likes: 0,
         };
     },
     methods: {
-        handleClick(e) {
-            console.log("Button clicked with event: ", e);
+        handleFileChange(evt) {
+            console.log("evt", evt);
+            this.file = evt.target.files[0];
+        },
+        likeAndSubscribe(evt) {
+            this.likes++;
+        },
+        handleSubmit(evt) {
+            evt.preventDefault();
 
-            this.anotherFunction();
-        },
-        anotherFunction() {
-            console.log("additional log");
-        },
-        emphasize(evt) {
-            // evt.target.style.textDecoration = 'underline';
-            evt.target.classList.add("underlined");
-            this.count += 1;
-        },
-        deemphasize(evt) {
-            // evt.target.style.textDecoration = '';
-            evt.target.classList.remove("underlined");
+            const formData = new FormData();
+
+            formData.append("title", this.title);
+            formData.append("username", this.username);
+            formData.append("description", this.description);
+            formData.append("file", this.file);
+
+            fetch("/add-formdata", {
+                method: "POST",
+                body: formData,
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    console.log("data from server: ", data);
+                    this.images = data;
+                });
         },
     },
     updated() {
@@ -37,13 +48,13 @@ Vue.createApp({
     },
     created() {
         console.log("Vue app was created");
-        fetch("/cities")
+        fetch("/images")
             .then((res) => {
                 return res.json();
             })
             .then((data) => {
                 console.log("data from server: ", data);
-                this.cities = data;
+                this.images = data;
             });
     },
     mounted() {
