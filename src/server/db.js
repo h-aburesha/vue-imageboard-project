@@ -6,6 +6,10 @@ const db = spicedPg(
         `postgres:${SQL_USER}:${SQL_PASSWORD}@localhost:5432/imageboard`
 );
 
+module.exports.getImgById = (id) => {
+    return db.query(`SELECT * FROM images WHERE id=$1`, [id]);
+};
+
 module.exports.getAllImg = () => {
     return db.query(`
     SELECT * FROM images

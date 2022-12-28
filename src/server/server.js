@@ -4,7 +4,7 @@ const { DataBrew } = require("aws-sdk");
 const app = express();
 require("dotenv").config();
 const { PORT = 8080 } = process.env;
-const { getAllImg, addImg } = require("./db");
+const { getAllImg, addImg, getImgById } = require("./db");
 const { uploader, fileUpload } = require("./file-upload");
 
 app.use(express.static(path.join(__dirname, "..", "client")));
@@ -17,6 +17,14 @@ app.get("/", (req, res) => {
 app.get("/images", (req, res) => {
     getAllImg().then(({ rows }) => {
         console.log("rows", rows);
+        res.json(rows);
+    });
+});
+
+app.get("/image/:id", (req, res) => {
+    const id = req.params.id;
+    getImgById(id).then(({ rows }) => {
+        console.log("image/:id -> :", rows);
         res.json(rows);
     });
 });

@@ -14,40 +14,46 @@
     </head>
     <body>
         <div id="main">
-            <!-- v-bind is used for attributes like class, src, href, alt -->
+            <!-- v-bind is used for attributes like class, src, href, alt @click="fullImageUrl = image.url" -->
+          <div class="image-container">
+                <ul class="images-list" v-if="images.length > 0">
+                <li v-for="image in images">
+                    <img v-bind:src="image.url"> 
+                    <h6>{{ image.title }}</h6> 
+                    <h6>{{image.username}}</h6>
+                    <h6>{{image.description}}</h6>
+                    
+                    <div class="sandbox-text">
+                    <p v-if=" likes > 0">
+                        Image has {{ likes }} likes
+                        <button v-on:click="likeAndSubscribe()">👍</button>
+                    </p>
+                    <p v-else>
+                        No one likes this 🥺,
+                        <button v-on:click="likeAndSubscribe()">like it 👍?</button>
+                    </p>
+                    </div>
+                </li>
+                </ul>
 
-       <div class="image-container">
-         
+                <form v-on:submit="handleSubmit">
+                    <div>
+                        <span>Title: </span><input type="text" name="filename" v-model="title">
+                        <span>Description: </span><input type="text" name="filename" v-model="description">
+                        <span>Username: </span><input type="text" name="filename" v-model="username">
+                    </div>
+                    
+                    <div>
+                        <span>File: </span><input type="file" name="file" accept="image/*" v-on:change="handleFileChange">
+                    </div>
+        
+                    <button>Submit</button>
+                </form>  
+            </div>
 
-           <ul class="images-list" v-if="images.length > 0">
-                <li v-for="image in images"> 
-                    <img v-bind:src="image.url" >
-                    <h4>{{image.title}}</h4>
-                </li>       
-            </ul>
-
-        <div class="sandbox-text">
-            <p v-if="likes > 0" > This image has {{likes}} likes <button v-on:click="likeAndSubscribe()">👍 </button></p>
-            <p v-else> This image is foever alone 🥺 , want to <button v-on:click="likeAndSubscribe()"> like it 👍 ?</button></p>
-       </div>
-       
-            <form v-on:submit="handleSubmit">
-                <div>
-                    <span>Title: </span><input type="text" name="filename" v-model="title">
-                    <span>Description: </span><input type="text" name="filename" v-model="description">
-                    <span>Username: </span><input type="text" name="filename" v-model="username">
-                </div>
-                
-                <div>
-                    <span>File: </span><input type="file" name="file" accept="image/*" v-on:change="handleFileChange">
-                </div>
-     
-                <button>Submit</button>
-            </form>
-       </div>
 
  
-       
+
 
          
         </div>
