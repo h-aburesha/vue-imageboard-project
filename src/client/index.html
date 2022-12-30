@@ -24,8 +24,8 @@
                         <h6>{{image.description}}</h6>
                         
                         <div class="sandbox-text">
-                            <p v-if=" likes > 0">
-                                Image has {{ likes }} likes
+                            <p v-if=" image.likes > 0">
+                                Image has {{ image.likes }} likes
                                 <button v-on:click="like()">👍</button>
                             </p>
                             <p v-else>

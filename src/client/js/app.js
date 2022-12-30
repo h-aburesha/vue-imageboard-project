@@ -9,7 +9,7 @@ Vue.createApp({
             description: "",
             username: "",
             file: null,
-            likes: 0,
+            // likes: 0,
             thisImageId: 5, // hard coded, dunno why it doesnot update from openModal(evt) event though console.log give correct values
         };
     },
