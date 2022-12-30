@@ -73,7 +73,13 @@
         margin: 20px;
     }
 
-    form div {
+    form .form-text-inputs-flex {
+        display: flex;
+        align-items: center;
+        margin: 8px 0;
+    }
+
+    form .form-file-upload-flex {
         display: flex;
         align-items: center;
         margin: 8px 0;

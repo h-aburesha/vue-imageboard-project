@@ -38,18 +38,22 @@
             </div>
             <div class="form-container">
                 <form v-on:submit="handleSubmit">
-                    <span>Title: </span><input type="text" name="filename" v-model="title">
-                    <span>Description: </span><input type="text" name="filename" v-model="description">
-                    <span>Username: </span><input type="text" name="filename" v-model="username">
-                    <span>File: </span><input type="file" name="file" accept="image/*" v-on:change="handleFileChange">
-                    <button>Submit</button>
+                    <div class="form-text-inputs-flex">
+                        <span>Title: </span><input type="text" name="filename" v-model="title">
+                        <span>Description: </span><input type="text" name="filename" v-model="description">
+                        <span>Username: </span><input type="text" name="filename" v-model="username">
+                    </div>
+                     <div class="form-file-upload-flex">
+                         <span>File: </span><input type="file" name="file" accept="image/*" v-on:change="handleFileChange">
+                         <button>Submit</button>
+                     </div>
                 </form> 
             </div>
 
 <!-- v-bind???? -->
             <image-summary v-bind:imageidprop="thisImageId"> 
 
-                <button> Show Modal</button>
+                <button> Close </button>
             </image-summary>
 
 
