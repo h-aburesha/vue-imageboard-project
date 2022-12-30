@@ -17,45 +17,45 @@
             <!-- v-bind is used for attributes like class, src, href, alt @click="fullImageUrl = image.url" -->
           <div class="image-container">
                 <ul class="images-list" v-if="images.length > 0">
-                <li v-for="image in images">
-                    <img v-bind:src="image.url"> 
-                    <h6>{{ image.title }}</h6> 
-                    <h6>{{image.username}}</h6>
-                    <h6>{{image.description}}</h6>
-                    
-                    <div class="sandbox-text">
-                    <p v-if=" likes > 0">
-                        Image has {{ likes }} likes
-                        <button v-on:click="likeAndSubscribe()">👍</button>
-                    </p>
-                    <p v-else>
-                        No one likes this 🥺,
-                        <button v-on:click="likeAndSubscribe()">like it 👍?</button>
-                    </p>
-                    </div>
-                </li>
+                    <li v-for="image in images">
+                        <img v-bind:src="image.url" :id="image.id" @click=""> 
+                        <h6>{{ image.title }}</h6> 
+                        <h6>{{image.username}}</h6>
+                        <h6>{{image.description}}</h6>
+                        
+                        <div class="sandbox-text">
+                            <p v-if=" likes > 0">
+                                Image has {{ likes }} likes
+                                <button v-on:click="like()">👍</button>
+                            </p>
+                            <p v-else>
+                                No one likes this 🥺,
+                                <button v-on:click="like()">like it 👍?</button>
+                            </p>
+                        </div>
+                    </li>
                 </ul>
-
+            </div>
+            <div class="form-container">
                 <form v-on:submit="handleSubmit">
-                    <div>
-                        <span>Title: </span><input type="text" name="filename" v-model="title">
-                        <span>Description: </span><input type="text" name="filename" v-model="description">
-                        <span>Username: </span><input type="text" name="filename" v-model="username">
-                    </div>
-                    
-                    <div>
-                        <span>File: </span><input type="file" name="file" accept="image/*" v-on:change="handleFileChange">
-                    </div>
-        
+                    <span>Title: </span><input type="text" name="filename" v-model="title">
+                    <span>Description: </span><input type="text" name="filename" v-model="description">
+                    <span>Username: </span><input type="text" name="filename" v-model="username">
+                    <span>File: </span><input type="file" name="file" accept="image/*" v-on:change="handleFileChange">
                     <button>Submit</button>
-                </form>  
+                </form> 
             </div>
 
+<!-- v-bind???? -->
+            <image-summary v-bind:imageidprop="thisImageId"> 
 
- 
+                <button> Show Modal</button>
+            </image-summary>
 
 
-         
+
+
+
         </div>
     </body>
 </html>

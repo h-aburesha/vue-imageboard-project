@@ -24,8 +24,10 @@ app.get("/images", (req, res) => {
 app.get("/image/:id", (req, res) => {
     const id = req.params.id;
     getImgById(id).then(({ rows }) => {
-        console.log("image/:id -> :", rows);
-        res.json(rows);
+        console.log("image/:id rows: , rows[0]-> :", rows, rows[0]);
+        //rows[0] just the object
+
+        res.json(rows); // or you respond back with rows[0] with just the {img object}
     });
 });
 

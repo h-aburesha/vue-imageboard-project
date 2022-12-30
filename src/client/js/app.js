@@ -1,5 +1,5 @@
 import * as Vue from "./vue.js";
-// import { imageSummaryModal } from "./modal/modal";
+import { imageSummary } from "./modal/modal.js";
 
 Vue.createApp({
     data: () => {
@@ -10,18 +10,19 @@ Vue.createApp({
             username: "",
             file: null,
             likes: 0,
-            img: "",
+            showModal: false,
+            thisImageId: 0,
         };
     },
-    // components: {
-    //     "image-modal": imageSummaryModal,
-    // },
+    components: {
+        "image-summary": imageSummary,
+    },
     methods: {
         handleFileChange(evt) {
             console.log("evt", evt);
             this.file = evt.target.files[0];
         },
-        likeAndSubscribe(evt) {
+        like(evt) {
             this.likes++;
         },
 

@@ -1,45 +1,42 @@
-export const imageSummaryModal = {
+export const imageSummary = {
     template: `
-        <div class="image-modal">
-            <p>Image title</p>
-            <ul>
-                </li>
-                    <img v-bind:src="img.url" > 
-                    <h6>{{ img.title }}</h6> 
-                    <h6>{{img.description}}</h6>
-                    <h6>uploaded by {{img.username}} on {{img.created_at}}</h6>
-                </li>
-            </ul>
-        </div>
+            <div class="image-modal">
+                <img v-bind:src="img.url" > 
+                <h6>{{ img.title }}</h6> 
+                <h6>{{img.description}}</h6>
+                <h6>uploaded by {{img.username}} on {{img.created_at}}</h6>
+                <button @click="imageClose">Close</button>
+            </div>
     `,
+    // no need for v-for because & loop here to access img Array because it is coming as rows[0] from server & just object
 
     // ------COMMUNCATION BETWEEN Parent and Child Components------
     // Properties that are passed in from parent
-    props: ["id"],
+    props: ["imageidprop"],
     // Events that will emit, so parent can react to it
     emits: ["imageclosed"],
     // -------------------------------------------------------------
 
     data: () => {
         return {
-            img: [],
+            img: {},
         };
     },
     methods: {
         imageClose: function (evt) {
-            // this.$emit from Vue that you can use to emit/send out events
             this.$emit("imageclosed", evt.target.value);
         },
     },
     mounted() {
-        console.log("Vue app was mounted");
-        fetch(`/image/${this.id}`)
+        fetch(`/image/${this.imageidprop}`)
             .then((res) => {
                 return res.json();
             })
             .then((data) => {
-                console.log("data from server: ", data);
+                console.log("data from modal: ", data);
                 this.img = data;
+                console.log("this.img: ", this.img, "this.data", data);
             });
+        // console.log("Vue modal app was mounted");
     },
 };
