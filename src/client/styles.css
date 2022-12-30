@@ -42,7 +42,7 @@
     }
 
     .images-list h6 {
-        margin: 6px 0;
+        margin: 3px 0;
         font-size: 1em;
         font-weight: lighter;
         text-align: center;
@@ -77,6 +77,60 @@
         display: flex;
         align-items: center;
         margin: 8px 0;
+    }
+    /* --------------------------------------------------------------------- */
+
+    .discoduck {
+        color: brown;
+    }
+
+    .hassan {
+        color: goldenrod;
+    }
+
+    .overlay-image img {
+        width: 100px;
+        height: 100px;
+        object-fit: fill;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .overlay-image {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user-button {
+        font-family: "Open Sans", sans-serif;
+        font-size: 8px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #000;
+        cursor: pointer;
+        border: 1px solid;
+        padding: 0.25em 0.25em;
+        box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px,
+            4px 4px 0px 0px, 5px 5px 0px 0px;
+        position: relative;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .user-button:active {
+        box-shadow: 0px 0px 0px 0px;
+        top: 3px;
+        left: 3px;
+    }
+
+    @media (min-width: 768px) {
+        .user-button {
+            padding: 0.25em 0.75em;
+        }
     }
 
     form .form-file-upload-flex {

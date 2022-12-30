@@ -16,18 +16,19 @@ app.get("/", (req, res) => {
 
 app.get("/images", (req, res) => {
     getAllImg().then(({ rows }) => {
-        console.log("rows", rows);
-        res.json(rows);
+        // console.log("rows", rows);
+        res.json(rows.sort((a, b) => a.id - b.id)); // sorted by id from postgres
     });
 });
 
 app.get("/image/:id", (req, res) => {
     const id = req.params.id;
+    console.log(":id from server", req.params.id);
     getImgById(id).then(({ rows }) => {
-        console.log("image/:id rows: , rows[0]-> :", rows, rows[0]);
+        console.log("rows: ", rows[0]);
         //rows[0] just the object
 
-        res.json(rows); // or you respond back with rows[0] with just the {img object}
+        res.json(rows[0]); // or you respond back with rows[0] with just the {img object}
     });
 });
 

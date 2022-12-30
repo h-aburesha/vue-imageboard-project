@@ -1,10 +1,10 @@
 export const imageSummary = {
     template: `
             <div class="image-modal">
-                <img v-bind:src="img.url" > 
-                <h6>{{ img.title }}</h6> 
-                <h6>{{img.description}}</h6>
-                <h6>uploaded by {{img.username}} on {{img.created_at}}</h6>
+                <img v-bind:src="image.url" > 
+                <h6>{{ image.title }}</h6> 
+                <h6>{{image.description}}</h6>
+                <h6>uploaded by {{image.username}} on {{image.created_at}}</h6>
                 <button @click="imageClose">Close</button>
             </div>
     `,
@@ -12,14 +12,14 @@ export const imageSummary = {
 
     // ------COMMUNCATION BETWEEN Parent and Child Components------
     // Properties that are passed in from parent
-    props: ["imageidprop"],
+    props: ["id"],
     // Events that will emit, so parent can react to it
     emits: ["imageclosed"],
     // -------------------------------------------------------------
 
     data: () => {
         return {
-            img: {},
+            image: {},
         };
     },
     methods: {
@@ -28,15 +28,15 @@ export const imageSummary = {
         },
     },
     mounted() {
-        fetch(`/image/${this.imageidprop}`)
+        fetch(`/image/${this.id}`)
             .then((res) => {
                 return res.json();
             })
             .then((data) => {
                 console.log("data from modal: ", data);
-                this.img = data;
-                console.log("this.img: ", this.img, "this.data", data);
+                this.image = data;
+                console.log("this.img: ", this.image, "this.data", data);
             });
-        // console.log("Vue modal app was mounted");
+        console.log("Vue modal app was mounted");
     },
 };

@@ -7,7 +7,7 @@ const db = spicedPg(
 );
 
 module.exports.getImgById = (id) => {
-    return db.query(`SELECT * FROM images WHERE id=$1`, [id]);
+    return db.query(`SELECT * FROM images WHERE id = $1`, [id]);
 };
 
 module.exports.getAllImg = () => {

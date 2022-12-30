@@ -10,8 +10,7 @@ Vue.createApp({
             username: "",
             file: null,
             likes: 0,
-            showModal: false,
-            thisImageId: 0,
+            thisImageId: 5, // hard coded, dunno why it doesnot update from openModal(evt) event though console.log give correct values
         };
     },
     components: {
@@ -22,10 +21,14 @@ Vue.createApp({
             console.log("evt", evt);
             this.file = evt.target.files[0];
         },
+        openModal(evt) {
+            console.log("openModal(evt.target.id): ", evt.target.id);
+            this.thisImageId = evt.target.id;
+            console.log("this.thisImageId: ", this.thisImageId);
+        },
         like(evt) {
             this.likes++;
         },
-
         handleSubmit(evt) {
             evt.preventDefault();
 
@@ -51,7 +54,7 @@ Vue.createApp({
     },
     updated() {
         // updated is executed when a variable from data is used in html and has changed
-        console.log("Vue app was updated");
+        // console.log("Vue app was updated");
     },
     created() {
         console.log("Vue app was created");
