@@ -9,8 +9,9 @@ Vue.createApp({
             description: "",
             username: "",
             file: null,
+            showModal: false,
             // likes: 0,
-            thisImageId: 5, // hard coded, dunno why it doesnot update from openModal(evt) event though console.log give correct values
+            thisImageId: null, // hard coded, dunno why it doesnot update from openModal(evt) event though console.log give correct values
         };
     },
     components: {
@@ -21,9 +22,10 @@ Vue.createApp({
             console.log("evt", evt);
             this.file = evt.target.files[0];
         },
-        openModal(evt) {
-            console.log("openModal(evt.target.id): ", evt.target.id);
-            this.thisImageId = evt.target.id;
+        openModal(id) {
+            console.log("openModal(evt.target.id): ", id);
+            this.thisImageId = id;
+            this.showModal = true;
             console.log("this.thisImageId: ", this.thisImageId);
         },
         like(evt) {

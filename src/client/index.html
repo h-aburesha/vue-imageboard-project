@@ -18,21 +18,21 @@
           <div class="image-container">
                 <ul class="images-list" v-if="images.length > 0">
                     <li v-for="image in images">
-                        <img v-bind:src="image.url" :id="image.id" @click="openModal"> 
+                        <img v-bind:src="image.url" :id="image.id" @click="openModal(image.id)"> 
                         <h6>{{ image.title }}</h6> 
                         <button class="user-button"><h6 :class="image.username">{{image.username}}</h6> </button>
                         <h6>{{image.description}}</h6>
                         
-                        <div class="sandbox-text">
-                            <p v-if=" image.likes > 0">
-                                Image has {{ image.likes }} likes
-                                <button v-on:click="like()">👍</button>
-                            </p>
-                            <p v-else>
-                                No one likes this 🥺,
-                                <button v-on:click="like()">like it 👍?</button>
-                            </p>
-                        </div>
+                <div class="sandbox-text">
+                    <p v-if=" image.likes > 0">
+                        Image has {{ image.likes }} likes
+                        <button v-on:click="like()">👍</button>
+                    </p>
+                    <p v-else>
+                        No one likes this 🥺,
+                        <button v-on:click="like()">like it 👍?</button>
+                    </p>
+                </div>
                     </li>
                 </ul>
             </div>
@@ -51,7 +51,7 @@
             </div>
 
 
-            <image-summary class="overlay-image" v-bind:id="thisImageId" > 
+            <image-summary v-if="showModal" class="overlay-image" v-bind:id="thisImageId" > 
 
                 <button v-on:click="showModal"> Close </button>
             </image-summary>
