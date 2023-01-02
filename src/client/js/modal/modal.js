@@ -2,12 +2,15 @@ export const imageSummary = {
     template: `
             <div class="image-modal">
                 <img v-bind:src="image.url" > 
-                <h6>{{ image.title }}</h6> 
-                <h6>{{image.description}}</h6>
-                <h6>uploaded by {{image.username}} on {{image.created_at}}</h6>
+            <div class="image-card-details">
+                <h6>Title: {{ image.title }}</h6> 
+                <h6>Description: {{image.description}}</h6>
+                <h6>uploaded by: {{image.username}} on {{image.created_at}}</h6>
+            </div>
  
         
             <form v-on:submit="handleCommentSubmit">
+            <h1>Add a comment! </h1>
                     <div class="form-text-inputs-flex">
                         <span>Comment: </span><input type="text" name="filename" v-model="comment">
                         <span>Username: </span><input type="text" name="filename" v-model="username">
@@ -17,10 +20,9 @@ export const imageSummary = {
 
             <ul class="comments-list" v-if="comments.length > 0">
                     <li v-for="comment in comments">
-                        <h1>{{ comment.comment }}</h1> 
+                        <h5>{{ comment.comment }} by user: {{comment.username}} at: {{comment.created_at}}</h5> 
                     </li>
             </ul> 
-
 
             <button @click="closeModal">Close</button>
             </div>
@@ -50,7 +52,7 @@ export const imageSummary = {
             this.$emit("close");
         },
         handleCommentSubmit(evt) {
-            // evt.preventDefault();
+            evt.preventDefault();
             // console.log(this.comment, this.username);
             fetch("/add-comment", {
                 method: "POST",
@@ -62,7 +64,14 @@ export const imageSummary = {
                     username: this.username,
                     image_id: this.id,
                 }),
-            });
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    console.log("data from server: ", data);
+                    this.comments.unshift(data.comment);
+                });
         },
     },
     mounted() {
@@ -83,7 +92,7 @@ export const imageSummary = {
             .then((data) => {
                 console.log("comments data: ", data);
                 this.comments = data;
-                console.log("this.img: ", this.comments, "this.data", data);
+                // console.log("this.img: ", this.comments, "this.data", data);
             });
 
         console.log("Vue modal app was mounted");

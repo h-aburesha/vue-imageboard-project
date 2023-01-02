@@ -26,11 +26,11 @@
                 <div class="sandbox-text">
                     <p v-if=" image.likes > 0">
                         Image has {{ image.likes }} likes
-                        <button v-on:click="like()">👍</button>
+                        <button v-on:click="like(image.id, image.likes)">👍</button>
                     </p>
                     <p v-else>
                         No one likes this 🥺,
-                        <button v-on:click="like()">like it 👍?</button>
+                        <button v-on:click="like(image.id, image.likes)">like it 👍?</button>
                     </p>
                 </div>
                     </li>

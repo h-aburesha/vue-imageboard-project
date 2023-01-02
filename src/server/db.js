@@ -34,7 +34,7 @@ module.exports.addComment = (comment, username, image_id) => {
 module.exports.getAllComments = (image_id) => {
     return db.query(
         `
-    SELECT comment FROM comments WHERE image_id = $1 
+    SELECT * FROM comments WHERE image_id = $1 
     ORDER BY created_at DESC;
     `,
         [image_id]

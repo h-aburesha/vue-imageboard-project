@@ -10,7 +10,6 @@ Vue.createApp({
             username: "",
             file: null,
             showModal: false,
-            // likes: 0,
             thisImageId: null, // hard coded, dunno why it doesnot update from openModal(evt) event though console.log give correct values
         };
     },
@@ -31,8 +30,8 @@ Vue.createApp({
         closeModal() {
             this.showModal = false;
         },
-        like(evt) {
-            this.likes++;
+        like(imageId, likes) {
+            console.log(imageId, likes);
         },
         handleSubmit(evt) {
             evt.preventDefault();
@@ -53,7 +52,10 @@ Vue.createApp({
                 })
                 .then((data) => {
                     console.log("data from server: ", data);
-                    this.images = data;
+                    this.images.unshift(data.image);
+
+                    // this.images = data;
+                    // add an element to images array mit "push" oder "unshift" zB
                 });
         },
     },

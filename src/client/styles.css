@@ -121,6 +121,22 @@
         align-items: center;
     }
 
+    .image-modal {
+        display: flex;
+        flex-direction: column;
+    }
+
+    ul.comments-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image-card-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     /* 
     .overlay-image img {
         width: 100px;

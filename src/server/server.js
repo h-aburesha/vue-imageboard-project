@@ -44,7 +44,11 @@ app.post("/add-comment", (req, res) => {
     // console.log("/add-comment: ", comment, username, image_id);
 
     addComment(comment, username, image_id).then(({ rows }) => {
-        console.log("Rows from /add-comment: ", rows[0]);
+        res.json({
+            success: true,
+            comment: rows[0],
+        });
+        console.log("Rows[0] from /add-comment: ", rows[0]);
     });
 });
 
@@ -63,21 +67,23 @@ app.post("/add-formdata", uploader.single("file"), fileUpload, (req, res) => {
     console.log("req.file: ", req.file);
     const { username, title, description } = req.body;
     const { fileUrl } = res.locals;
-
-    // console.log(username, title, description, "req.body", fileUrl);
-    addImg(fileUrl, username, title, description);
-
-    // post what came from the file sent from app.js to add-formdata & its body contains (file, desc)
-    if (req.file) {
-        res.json({
-            success: true,
-            // responding to the browser
-        });
-    } else {
+    if (!req.file) {
         res.json({
             success: false,
         });
+        return;
     }
+
+    // console.log(username, title, description, "req.body", fileUrl);
+    addImg(fileUrl, username, title, description).then(({ rows }) => {
+        console.log(rows);
+        res.json({
+            success: true,
+            image: rows[0],
+        });
+    }); // im then block send success response back
+
+    // post what came from the file sent from app.js to add-formdata & its body contains (file, desc)
 });
 
 app.listen(PORT, () => console.log(`I'm listening on port ${PORT}`));
