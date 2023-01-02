@@ -1,6 +1,6 @@
 export const imageSummary = {
     template: `
-            <div class="image-modal">
+            <div class="image-modal" @click="closeModal">
                 <img v-bind:src="image.url" > 
             <div class="image-card-details">
                 <h6>Title: {{ image.title }}</h6> 
@@ -20,6 +20,7 @@ export const imageSummary = {
 
             <ul class="comments-list" v-if="comments.length > 0">
                     <li v-for="comment in comments">
+                    
                         <h5>{{ comment.comment }} by user: {{comment.username}} at: {{comment.created_at}}</h5> 
                     </li>
             </ul> 

@@ -32,6 +32,23 @@ Vue.createApp({
         },
         like(imageId, likes) {
             console.log(imageId, likes);
+            fetch("/add-likes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    imageId,
+                    likes,
+                }),
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    console.log("data from server: ", data);
+                    // this.images.likes.unshift(data.like);
+                });
         },
         handleSubmit(evt) {
             evt.preventDefault();

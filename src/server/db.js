@@ -40,3 +40,14 @@ module.exports.getAllComments = (image_id) => {
         [image_id]
     );
 };
+
+module.exports.addLikes = (imageId) => {
+    return db.query(
+        `
+        UPDATE images 
+        SET likes = likes + 1 
+        WHERE id = $1
+        RETURNING *;`,
+        [imageId]
+    );
+};

@@ -10,6 +10,7 @@ const {
     getImgById,
     addComment,
     getAllComments,
+    addLikes,
 } = require("./db");
 const { uploader, fileUpload } = require("./file-upload");
 
@@ -84,6 +85,22 @@ app.post("/add-formdata", uploader.single("file"), fileUpload, (req, res) => {
     }); // im then block send success response back
 
     // post what came from the file sent from app.js to add-formdata & its body contains (file, desc)
+});
+
+app.post("/add-likes", (req, res) => {
+    console.log("req.body: ", req.body);
+
+    const { imageId, likes } = req.body;
+
+    console.log("/add-likes: ", imageId, likes);
+
+    addLikes(imageId).then(({ rows }) => {
+        res.json({
+            success: true,
+            like: rows[0],
+        });
+        console.log("Rows[0] from /add-likes: ", rows[0]);
+    });
 });
 
 app.listen(PORT, () => console.log(`I'm listening on port ${PORT}`));
