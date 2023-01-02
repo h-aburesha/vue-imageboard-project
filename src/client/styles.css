@@ -88,6 +88,40 @@
         color: goldenrod;
     }
 
+    .overlay-image::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.903);
+        filter: blur(5px);
+        z-index: -1;
+    }
+
+    .overlay-image img {
+        position: initial;
+        width: 300px;
+        height: 300px;
+        top: 10%;
+        object-fit: fill;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .overlay-image {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 
     .overlay-image img {
         width: 100px;
         height: 100px;
@@ -100,7 +134,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
+    } */
 
     .user-button {
         font-family: "Open Sans", sans-serif;

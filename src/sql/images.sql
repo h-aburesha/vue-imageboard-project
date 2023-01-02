@@ -9,6 +9,15 @@ CREATE TABLE images(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+CREATE TABLE comments(
+    id SERIAL PRIMARY KEY,
+    comment TEXT NOT NULL,
+    username VARCHAR NOT NULL,
+    image_id INTEGER REFERENCES images(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- ALTER TABLE images ADD COLUMN likes INTEGER DEFAULT 0;
 
 INSERT INTO images (url, username, title, description) VALUES (

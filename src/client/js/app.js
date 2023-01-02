@@ -28,6 +28,9 @@ Vue.createApp({
             this.showModal = true;
             console.log("this.thisImageId: ", this.thisImageId);
         },
+        closeModal() {
+            this.showModal = false;
+        },
         like(evt) {
             this.likes++;
         },
