@@ -1,6 +1,6 @@
 export const imageSummary = {
     template: `
-            <div class="image-modal" @click="closeModal">
+            <div class="image-modal" >
                 <img v-bind:src="image.url" > 
             <div class="image-card-details">
                 <h6>Title: {{ image.title }}</h6> 

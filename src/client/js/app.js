@@ -1,6 +1,12 @@
 import * as Vue from "./vue.js";
 import { imageSummary } from "./modal/modal.js";
 
+window.addEventListener("popstate", (e) => {
+    console.log("popstate event: ", location.hash, e.state);
+    // show whatever is appropriate for the new url
+    // if you need it, e.state has the data you passed to `pushState`
+});
+
 Vue.createApp({
     data: () => {
         return {
