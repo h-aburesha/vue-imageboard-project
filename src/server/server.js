@@ -11,6 +11,7 @@ const {
     addComment,
     getAllComments,
     addLikes,
+    getMoreImages,
 } = require("./db");
 const { uploader, fileUpload } = require("./file-upload");
 
@@ -102,5 +103,17 @@ app.post("/add-likes", (req, res) => {
         console.log("Rows[0] from /add-likes: ", rows[0]);
     });
 });
+
+// app.post("/moreimages", (req, res) => {
+//     const lowestId = req.body.lowestId;
+//     console.log("lowestId", lowestId);
+//     getMoreImages(lowestId).then(({ rows }) => {
+//         console.log("rows from /moreimages : ", rows);
+//         res.json({
+//             success: true,
+//             image: rows[0],
+//         });
+//     });
+// });
 
 app.listen(PORT, () => console.log(`I'm listening on port ${PORT}`));

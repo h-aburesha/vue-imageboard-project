@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Image Board</title>
         <link rel="stylesheet" href="/styles.css">
+        <link rel="icon" type="image/x-icon" href="./favicon.png">
         <script
             defer
             src="./js/app.js"
@@ -23,19 +24,22 @@
                         <button class="user-button"><h6 :class="image.username">{{image.username}}</h6> </button>
                         <h6>{{image.description}}</h6>
                         
+                        
                 <div class="sandbox-text">
                     <p v-if=" image.likes > 0">
                         Image has {{ image.likes }} likes
                         <button v-on:click="like(image.id, image.likes)">👍</button>
                     </p>
                     <p v-else>
-                        No one likes this 🥺,
-                        <button v-on:click="like(image.id, image.likes)">like it 👍?</button>
+                        No likes! 🥺,
+                        <button v-on:click="like(image.id, image.likes)">like? 👍</button>
                     </p>
                 </div>
                     </li>
                 </ul>
+                <!-- <button @click="moreImages">Load more images ...</button> -->
             </div>
+            
             <div class="form-container">
                 <form v-on:submit="handleSubmit">
                     <div class="form-text-inputs-flex">
@@ -45,9 +49,10 @@
                     </div>
                      <div class="form-file-upload-flex">
                          <span>File: </span><input type="file" name="file" accept="image/*" v-on:change="handleFileChange">
-                         <button>Submit</button>
+                         <button>Submit</button>  <div v-if="loading"> 🛠️ 🛠️ .. Loading.. 🛠️ 🛠️</div>
                      </div>
                 </form> 
+                
             </div>
 
 

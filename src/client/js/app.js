@@ -10,7 +10,8 @@ Vue.createApp({
             username: "",
             file: null,
             showModal: false,
-            thisImageId: null, // hard coded, dunno why it doesnot update from openModal(evt) event though console.log give correct values
+            thisImageId: null,
+            loading: false,
         };
     },
     components: {
@@ -30,6 +31,28 @@ Vue.createApp({
         closeModal() {
             this.showModal = false;
         },
+        // moreImages() {
+        //     function getLowestImageId(images) {
+        //         images.sort((a, b) => a.id - b.id);
+        //         return images[0].id;
+        //     }
+        //     const lowestId = getLowestImageId(this.images);
+        //     fetch("/moreimages", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({ lowestId }),
+        //     })
+        //         .then((res) => {
+        //             return res.json();
+        //         })
+        //         .then((data) => {
+        //             console.log("app.js /moreimages from server: ", data);
+        //             this.images.unshift(data.image);
+        //         });
+        //     console.log(lowestId);
+        // },
         like(imageId, likes) {
             console.log(imageId, likes);
             fetch("/add-likes", {
@@ -46,12 +69,18 @@ Vue.createApp({
                     return res.json();
                 })
                 .then((data) => {
-                    console.log("data from server: ", data);
-                    // this.images.likes.unshift(data.like);
+                    console.log("data.like: ", data.like.likes, this.images);
+                    const index = this.images.findIndex(
+                        (image) => image.id === data.like.id
+                    );
+                    if (index !== -1) {
+                        this.images[index].likes = data.like.likes;
+                    }
                 });
         },
         handleSubmit(evt) {
             evt.preventDefault();
+            this.loading = true;
 
             const formData = new FormData();
 
@@ -68,8 +97,9 @@ Vue.createApp({
                     return res.json();
                 })
                 .then((data) => {
-                    console.log("data from server: ", data);
+                    // console.log("app.js /add-formdata from server: ", data);
                     this.images.unshift(data.image);
+                    this.loading = false;
 
                     // this.images = data;
                     // add an element to images array mit "push" oder "unshift" zB
@@ -87,7 +117,7 @@ Vue.createApp({
                 return res.json();
             })
             .then((data) => {
-                console.log("data from server: ", data);
+                // console.log("app.js /images data from server: ", data);
                 this.images = data;
             });
     },
