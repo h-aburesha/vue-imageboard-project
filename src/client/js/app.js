@@ -33,9 +33,13 @@ Vue.createApp({
             this.thisImageId = id;
             this.showModal = true;
             console.log("this.thisImageId: ", this.thisImageId);
+            history.pushState({}, "", `/#${this.thisImageId}`);
         },
         closeModal() {
+            console.log("closeModal");
+            history.pushState({}, "", `/`);
             this.showModal = false;
+            this.thisImageId = null;
         },
         // moreImages() {
         //     function getLowestImageId(images) {
@@ -129,5 +133,28 @@ Vue.createApp({
     },
     mounted() {
         console.log("Vue app was mounted");
+        // this.currentImageId = window.location.hash.slice(1);
+        if (!this.thisImageId && window.location.hash) {
+            this.thisImageId = window.location.hash.split("#")[1];
+            this.showModal = true;
+        }
+        this.thisImageId = window.location.hash.slice(1);
+        addEventListener("popstate", (e) => {
+            console.log(
+                "popstate event: ",
+                location.href,
+                e.state,
+                this.thisImageId,
+                window.location.hash
+            ); //.hash, e.state
+            if (!this.showModal && window.location.hash) {
+                this.thisImageId = window.location.hash.split("#")[1];
+                this.showModal = true;
+            }
+            if (this.showModal && !window.location.hash) {
+                this.thisImageId = null;
+                this.showModal = false;
+            }
+        });
     },
 }).mount("#main");
