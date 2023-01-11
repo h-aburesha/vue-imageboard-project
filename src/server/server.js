@@ -11,7 +11,6 @@ const {
     addComment,
     getAllComments,
     addLikes,
-    getMoreImages,
 } = require("./db");
 const { uploader, fileUpload } = require("./file-upload");
 
@@ -24,7 +23,7 @@ app.get("/", (req, res) => {
 
 app.get("/images", (req, res) => {
     getAllImg().then(({ rows }) => {
-        // console.log("rows", rows);
+        console.log("rows", rows);
         res.json(rows.sort((a, b) => a.id - b.id)); // sorted by id from postgres
     });
 });

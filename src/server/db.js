@@ -11,27 +11,28 @@ module.exports.getImgById = (id) => {
 };
 
 module.exports.getAllImg = () => {
+    console.log("process:", process.env);
     return db.query(`
     SELECT * FROM images
-    ORDER BY id ASC
+    ORDER BY id ASC;
     `);
 };
 
-module.exports.getMoreImages = (lastImgId) => {
-    return db.query(
-        `
-    SELECT id, title, url, (
-        SELECT id FROM images
-        ORDER BY id ASC
-        LIMIT 1
-    ) AS "lowestId" FROM images
-    WHERE id > $1
-    ORDER BY id DESC
-    LIMIT 5;
-    `,
-        [lastImgId]
-    );
-};
+// module.exports.getMoreImages = (lastImgId) => {
+//     return db.query(
+//         `
+//     SELECT id, title, url, (
+//         SELECT id FROM images
+//         ORDER BY id ASC
+//         LIMIT 1
+//     ) AS "lowestId" FROM images
+//     WHERE id > $1
+//     ORDER BY id DESC
+//     LIMIT 5;
+//     `,
+//         [lastImgId]
+//     );
+// };
 
 module.exports.addImg = (url, username, title, description) => {
     return db.query(
